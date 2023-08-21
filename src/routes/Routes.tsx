@@ -15,18 +15,18 @@ type AppRoute = RouteProps & {
 };
 
 /* Public routes */
-const Home = lazy(() => import("pages/Home"));
+//const Home = lazy(() => import("../pages/Home"));
 
 /* Private routes */
-const UserPrefs = lazy(() => import("pages/User/Preferences"));
-const Quotes = lazy(() => import("pages/Quotes"));
+//const UserPrefs = lazy(() => import("pages/User/Preferences"));
+//const Quotes = lazy(() => import("pages/Quotes"));
 
 /* Restricted routes */
-const Login = lazy(() => import("pages/Login"));
-const Register = lazy(() => import("pages/Register"));
+const Login = lazy(() => import("../pages/Login"));
+//const Registration = lazy(() => import("../pages/Register"));
 
 /* Error routes */
-const NotFound404 = lazy(() => import("pages/NotFound404"));
+const NotFound404 = lazy(() => import("../pages/Errors/NotFound404"));
 
 export const AppRoutes: AppRoute[] = [
     // Restricted Routes
@@ -35,10 +35,10 @@ export const AppRoutes: AppRoute[] = [
         path: "/login",
         children: <Login/>,
     },
-    {
+/*    {
         type: RouteType.RESTRICTED,
         path: "/signup",
-        children: <Register/>,
+        children: <Registration/>,
     },
     // Private Routes
     {
@@ -56,7 +56,7 @@ export const AppRoutes: AppRoute[] = [
         type: RouteType.PUBLIC,
         path: "/",
         children: <Home/>,
-    },
+    },*/
     // 404 Not Found
     {
         type: RouteType.PUBLIC,

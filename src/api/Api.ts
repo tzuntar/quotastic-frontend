@@ -1,4 +1,4 @@
-import {Axios, AxiosRequestConfig, AxiosRequestHeaders} from "axios";
+import Axios, {AxiosRequestConfig, AxiosRequestHeaders} from "axios";
 
 export async function apiRequest<D = Record<string, unknown>, R = unknown>(
     method: "get" | "delete" | "head" | "options" | "post" | "put" | "patch",
