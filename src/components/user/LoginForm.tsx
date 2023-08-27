@@ -26,6 +26,9 @@ const LoginForm: React.FC = () => {
 
     return (
         <form onSubmit={loginSubmit}>
+            {(apiError != null && apiError !== '') &&
+                <p className="text-orange py-4">Error: {apiError}</p>
+            }
             <Controller
                 control={control}
                 name="email"
