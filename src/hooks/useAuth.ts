@@ -2,7 +2,6 @@ import {useNavigate} from 'react-router-dom';
 import authStore from "../stores/auth.store";
 import {useEffect, useRef} from "react";
 import {routeConstants} from "../constants/routeConstants";
-import {clearInterval} from "timers";
 import {userStorage} from "../lib/localStorage";
 import {StatusCode} from "../constants/statusCodeConstants";
 import * as API from "../api/Api";
