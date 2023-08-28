@@ -15,7 +15,10 @@ module.exports = {
         },
         extend: {
             dropShadow: {
-                'md': '0 0 10px 0 #0000001A'
+                'md': '0 0 10px #00000018'
+            },
+            boxShadow: {
+                'lightener': 'inset 0 0 100px 100px rgba(255, 255, 255, 0.1)'
             }
         },
     },

@@ -1,4 +1,4 @@
-import {FC, lazy, Suspense} from "react";
+import React, {FC, lazy, Suspense} from "react";
 import {Route, RouteProps, Routes as Switch} from "react-router-dom";
 
 import PrivateRoute from "./PrivateRoute";
@@ -15,32 +15,22 @@ type AppRoute = RouteProps & {
 };
 
 /* Public routes */
-//const Home = lazy(() => import("../pages/Home"));
+const Home = lazy(() => import("../pages/Home"));
+const Login = lazy(() => import("../pages/Login"));
+const Registration = lazy(() => import("../pages/Registration"));
 
 /* Private routes */
 //const UserPrefs = lazy(() => import("pages/User/Preferences"));
 //const Quotes = lazy(() => import("pages/Quotes"));
 
 /* Restricted routes */
-const Login = lazy(() => import("../pages/Login"));
-//const Registration = lazy(() => import("../pages/Register"));
 
 /* Error routes */
 const NotFound404 = lazy(() => import("../pages/Errors/NotFound404"));
 
 export const AppRoutes: AppRoute[] = [
     // Restricted Routes
-    {
-        type: RouteType.RESTRICTED,
-        path: "/login",
-        children: <Login/>,
-    },
-/*    {
-        type: RouteType.RESTRICTED,
-        path: "/signup",
-        children: <Registration/>,
-    },
-    // Private Routes
+/*    // Private Routes
     {
         type: RouteType.PRIVATE,
         path: "/me/preferences",
@@ -50,13 +40,23 @@ export const AppRoutes: AppRoute[] = [
         type: RouteType.PRIVATE,
         path: "/quotes",
         children: <Quotes/>,
-    },
+    },*/
     // Public Routes
     {
         type: RouteType.PUBLIC,
         path: "/",
         children: <Home/>,
-    },*/
+    },
+    {
+        type: RouteType.PUBLIC,
+        path: "/login",
+        children: <Login/>,
+    },
+    {
+        type: RouteType.PUBLIC,
+        path: "/signup",
+        children: <Registration/>,
+    },
     // 404 Not Found
     {
         type: RouteType.PUBLIC,

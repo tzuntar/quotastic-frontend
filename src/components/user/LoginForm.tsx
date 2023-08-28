@@ -40,7 +40,8 @@ const LoginForm: React.FC = () => {
                             type="email"
                             placeholder="E-mail"
                             aria-label="E-mail"
-                            className="border-orange border-2 rounded-full px-6 py-1 sm:w-1/2 lg:w-1/3"/>
+                            className="border-orange border-2 rounded-full px-6 py-1 sm:w-1/2 lg:w-1/3
+                                       focus:outline-alt-orange"/>
                     </div>
                 )}
             />
@@ -55,12 +56,15 @@ const LoginForm: React.FC = () => {
                             type="password"
                             placeholder="Password"
                             aria-label="Password"
-                            className="border-orange border-2 rounded-full px-6 py-1 sm:w-1/2 lg:w-1/3 mt-4"/>
+                            className="border-orange border-2 rounded-full px-6 py-1 sm:w-1/2 lg:w-1/3 mt-5
+                                       focus:outline-alt-orange"/>
                     </div>
                 )}
             />
             <input type="submit" value="Sign In"
-                   className="bg-gradient-to-t from-orange to-alt-orange px-9 py-1 rounded-full mt-6 text-white cursor-pointer"/>
+                   className="bg-gradient-to-t from-orange to-alt-orange
+                   p-2 rounded-full w-32 mt-6 text-white cursor-pointer
+                   drop-shadow-md hover:shadow-lightener active:brightness-90"/>
         </form>
     )
 }

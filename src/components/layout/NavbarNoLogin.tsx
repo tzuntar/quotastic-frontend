@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import {Link, NavLink, useNavigate} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import {routeConstants} from "../../constants/routeConstants";
 import useMobileDetect from "../../hooks/useMobileDetect";
 import logo from "../../assets/quotastic_logo.png";
@@ -17,7 +17,9 @@ const Navbar: React.FC = () => {
                         <img src={logo} alt="Quotastic" className="w-40"/>
                     </Link>
                     <Link to={routeConstants.SIGNUP}>
-                        <button className="bg-orange p-2 rounded-full w-32 text-white drop-shadow-md">Sign Up</button>
+                        <button className="bg-orange p-2 rounded-full w-32 text-white drop-shadow-md
+                        cursor-pointer drop-shadow-md hover:shadow-lightener active:brightness-90">Sign Up
+                        </button>
                     </Link>
                 </div>
             </nav>
