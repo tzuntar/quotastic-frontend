@@ -10,7 +10,7 @@ export const getCurrentUser = async () =>
 export const login = async (data: LoginUserFields) =>
     apiRequest<LoginUserFields, UserType>('post', apiRoutes.LOGIN, data);
 
-export const signUp = async (data: RegisterUserFields) =>
+export const register = async (data: RegisterUserFields) =>
     apiRequest<RegisterUserFields, UserType>('post', apiRoutes.SIGNUP, data);
 
 export const refreshTokens = async () =>

@@ -15,19 +15,19 @@ const LoginForm: React.FC = () => {
 
     const loginSubmit = handleSubmit(async (data: LoginUserFields) => {
         const response = await API.login(data);
-        if (response.data?.statusCode === StatusCode.BAD_REQUEST ||
-            response.data?.statusCode === StatusCode.INTERNAL_SERVER_ERROR) {
-            return setApiError(response.data.message);
+        if (response.data?.statusCode === StatusCode.OK) {
+            authStore.login(response.data);
+            return navigate(routeConstants.HOME);
         }
 
-        authStore.login(response.data);
-        navigate(routeConstants.HOME);
+        // login failed, don't redirect
+        setApiError(response.data.message);
     });
 
     return (
         <form onSubmit={loginSubmit}>
             {(apiError != null && apiError !== '') &&
-                <p className="text-orange py-4">Error: {apiError}</p>
+                <p className="text-orange font-bold pb-4">{apiError}</p>
             }
             <Controller
                 control={control}
