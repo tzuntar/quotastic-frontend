@@ -14,7 +14,11 @@ module.exports = {
             sans: ['Raleway', 'sans-serif']
         },
         extend: {
+            screens: {
+                'lg': '990px',
+            },
             dropShadow: {
+                'sm': '0 0 5px #00000008',
                 'md': '0 0 10px #00000018'
             },
             boxShadow: {

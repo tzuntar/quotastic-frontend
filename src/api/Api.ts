@@ -9,16 +9,14 @@ export async function apiRequest<D = Record<string, unknown>, R = unknown>(
     } & AxiosRequestConfig,
 ) {
     try {
-        const response = await Axios.request<R>({
-            baseURL: process.env.API_URL,
+        return await Axios.request<R>({
+            baseURL: process.env.API_URL || 'http://localhost:8000',
             url: path,
             method: method,
             data: input,
             headers: options?.headers,
             withCredentials: true,
         });
-        return response;
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (error: any) {
         return error.response;
     }

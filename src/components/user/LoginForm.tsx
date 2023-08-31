@@ -27,7 +27,7 @@ const LoginForm: React.FC = () => {
     return (
         <form onSubmit={loginSubmit}>
             {(apiError != null && apiError !== '') &&
-                <p className="text-orange font-bold pb-4">{apiError}</p>
+                <p className="text-orange font-bold pb-4">Could not log you in: {apiError}</p>
             }
             <Controller
                 control={control}
@@ -40,8 +40,8 @@ const LoginForm: React.FC = () => {
                             type="email"
                             placeholder="E-mail"
                             aria-label="E-mail"
-                            className="border-orange border-2 rounded-full px-6 py-1 sm:w-1/2 lg:w-1/3
-                                       focus:outline-alt-orange"/>
+                            className="border-orange border-[1.5px] rounded-full px-6 py-1 w-full
+                                       focus:outline-alt-orange focus:drop-shadow-sm"/>
                     </div>
                 )}
             />
@@ -50,14 +50,14 @@ const LoginForm: React.FC = () => {
                 name="password"
                 render={({field}) => (
                     <div className="">
-                        <label htmlFor="password" className="hidden">E-mail</label>
+                        <label htmlFor="password" className="hidden">Password</label>
                         <input
                             {...field}
                             type="password"
                             placeholder="Password"
                             aria-label="Password"
-                            className="border-orange border-2 rounded-full px-6 py-1 sm:w-1/2 lg:w-1/3 mt-5
-                                       focus:outline-alt-orange"/>
+                            className="border-orange border-[1.5px] rounded-full px-6 py-1 w-full mt-5
+                                       focus:outline-alt-orange focus:drop-shadow-sm"/>
                     </div>
                 )}
             />
