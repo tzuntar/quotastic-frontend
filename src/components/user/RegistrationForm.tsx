@@ -15,8 +15,8 @@ const RegistrationForm: React.FC = () => {
 
     const registrationSubmit = handleSubmit(async (data: RegistrationUserFields) => {
         const response = await API.register(data);
-        if (response.data?.statusCode === StatusCode.CREATED ||
-            response.data?.statusCode === StatusCode.OK) {
+        if (response.status === StatusCode.CREATED ||
+            response.status === StatusCode.OK) {
             authStore.login(response.data);
             return navigate(routeConstants.HOME);
         }

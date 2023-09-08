@@ -15,7 +15,7 @@ const LoginForm: React.FC = () => {
 
     const loginSubmit = handleSubmit(async (data: LoginUserFields) => {
         const response = await API.login(data);
-        if (response.data?.statusCode === StatusCode.OK) {
+        if (response.status === StatusCode.OK) {
             authStore.login(response.data);
             return navigate(routeConstants.HOME);
         }

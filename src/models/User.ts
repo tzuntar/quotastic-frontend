@@ -5,4 +5,7 @@ export type UserType = {
     email: string;
     karma: number;
     avatarUrl?: string;
+
+    access_token?: string;
+    jwtRefreshToken?: string;
 }
