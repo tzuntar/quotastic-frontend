@@ -1,4 +1,5 @@
 import Axios, {AxiosRequestConfig, AxiosRequestHeaders} from "axios";
+import authStore from "../stores/auth.store";
 
 export async function apiRequest<D = Record<string, unknown>, R = unknown>(
     method: "get" | "delete" | "head" | "options" | "post" | "put" | "patch",
@@ -8,13 +9,17 @@ export async function apiRequest<D = Record<string, unknown>, R = unknown>(
         headers?: AxiosRequestHeaders;
     } & AxiosRequestConfig,
 ) {
+    const token = authStore.user?.access_token;
+    const headers = token
+        ? {Authorization: `Bearer ${token}`, ...options?.headers}
+        : options?.headers;
     try {
         return await Axios.request<R>({
             baseURL: process.env.API_URL || 'http://localhost:8000',
             url: path,
             method: method,
             data: input,
-            headers: options?.headers,
+            headers: headers,
             withCredentials: true,
         });
     } catch (error: any) {
@@ -23,3 +28,4 @@ export async function apiRequest<D = Record<string, unknown>, R = unknown>(
 }
 
 export * from './UserApi';
+export * from './QuotesApi';

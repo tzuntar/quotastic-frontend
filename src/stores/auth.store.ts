@@ -1,4 +1,4 @@
-import {UserType} from "../models/User";
+import {UserType} from "../models/user";
 import {userStorage} from "../lib/localStorage";
 import {makeAutoObservable} from "mobx";
 

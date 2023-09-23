@@ -1,5 +1,5 @@
 import {apiRequest} from "./Api";
-import {UserType} from "../models/User";
+import {UserType} from "../models/user";
 import {apiRoutes} from "../constants/apiConstants";
 import {LoginUserFields} from "../hooks/react-hook-form/useLogin";
 import {RegistrationUserFields} from "../hooks/react-hook-form/useRegistration";
