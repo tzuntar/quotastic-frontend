@@ -6,6 +6,6 @@ export type UserType = {
     karma: number;
     avatarUrl?: string;
 
-    access_token?: string;
+    accessToken?: string;
     jwtRefreshToken?: string;
 }

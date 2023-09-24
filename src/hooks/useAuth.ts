@@ -16,7 +16,7 @@ const useAuth = () => {
 
         if (response.data.statusCode === StatusCode.UNAUTHORIZED
             || response.data.statusCode === StatusCode.FORBIDDEN) {
-            await API.logout();
+            await API.logout(); // is this necessary?
             authStore.logout();
             navigate(routeConstants.HOME);
             return;

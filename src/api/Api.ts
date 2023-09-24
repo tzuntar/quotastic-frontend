@@ -1,5 +1,5 @@
 import Axios, {AxiosRequestConfig, AxiosRequestHeaders} from "axios";
-import authStore from "../stores/auth.store";
+import {userStorage} from "../lib/localStorage";
 
 export async function apiRequest<D = Record<string, unknown>, R = unknown>(
     method: "get" | "delete" | "head" | "options" | "post" | "put" | "patch",
@@ -9,7 +9,7 @@ export async function apiRequest<D = Record<string, unknown>, R = unknown>(
         headers?: AxiosRequestHeaders;
     } & AxiosRequestConfig,
 ) {
-    const token = authStore.user?.access_token;
+    const token = userStorage.getUser()?.accessToken;
     const headers = token
         ? {Authorization: `Bearer ${token}`, ...options?.headers}
         : options?.headers;

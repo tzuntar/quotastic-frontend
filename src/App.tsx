@@ -2,11 +2,11 @@ import {FC} from "react";
 import Routes from "./routes/Routes";
 import {usePageIdentification} from "./hooks/usePageIdentification";
 import {observer} from "mobx-react";
-import useAuth from "./hooks/useAuth";
 
 const App: FC = () => {
     usePageIdentification();
-    useAuth();
+    // ToDo: temporarily disable refresh tokens because the backend doesn't support it yet
+    //useAuth();
 
     return <Routes/>;
 };
