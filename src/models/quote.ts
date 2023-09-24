@@ -11,5 +11,5 @@ export type QuoteType = {
 export type QuoteReactionType = {
     id: string;
     type: string;
-    userId: string;
+    user?: UserType;
 }

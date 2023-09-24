@@ -1,12 +1,15 @@
-import React, {useEffect, useState} from "react";
+import React, {useMemo, useState} from "react";
 import * as API from '../../api/Api';
 import {QuoteType} from "../../models/quote";
 import upvote from '../../assets/icons/upvote.png';
+import upvote_selected from '../../assets/icons/upvote_selected.png';
 import downvote from '../../assets/icons/downvote.png';
+import downvote_selected from '../../assets/icons/downvote_selected.png';
 import default_avatar from '../../assets/default_avatar.png';
 import {useNavigate} from "react-router-dom";
 import {routeConstants} from "../../constants/routeConstants";
 import authStore from "../../stores/auth.store";
+import {StatusCode} from "../../constants/statusCodeConstants";
 
 type VoteType = 'upvote' | 'downvote' | null;
 
@@ -15,27 +18,27 @@ interface Props {
 }
 
 const Quote: React.FC<Props> = ({quote}) => {
-    const [showEdit, setShowEdit] = useState(false);
-    const [showDelete, setShowDelete] = useState(false);
-    const [score, setScore] = useState(quote.reactions?.filter(r => r.type === 'upvote').length || 0);
-    const [selectedVote, setSelectedVote] = useState<VoteType>(null);
+    const initialScore = useMemo(() => {
+        return quote.reactions?.filter(r => r.type === 'upvote').length || 0
+    }, [quote.reactions]);
+    const initialVote = useMemo(() => {
+        return quote.reactions?.find(r => r.user?.id === authStore.user?.id);
+    }, [quote.reactions]);
+
+    const [score, setScore] = useState(initialScore);
+    // auto-select the voting button if the user has already voted on this quote
+    const [selectedVote, setSelectedVote] = useState<VoteType>(initialVote?.type as VoteType);
 
     const navigate = useNavigate();
     const isLoggedIn = authStore.user !== null;
 
-    useEffect(() => {
-        // auto-select the voting button if the user has already voted on this quote
-        const userReaction = quote.reactions?.find(r => r.userId === authStore.user?.id);
-        if (userReaction)
-            setSelectedVote(userReaction.type as VoteType);
-    }, [quote.reactions]);
-
-    const handleVote = (voteType: VoteType) => {
+    const handleVote = async (voteType: VoteType) => {
         if (!isLoggedIn) return navigate(routeConstants.LOGIN);
-        API.vote(quote.id, voteType)
-            .then(result => {
-                console.log(result);
-            });
+        const result = await API.vote(quote.id, voteType);
+        if (result.status === StatusCode.OK || result.status === StatusCode.CREATED) {
+            setScore(result.data);
+            setSelectedVote(voteType);
+        }
     }
 
     return (
@@ -43,11 +46,13 @@ const Quote: React.FC<Props> = ({quote}) => {
             <div className="flex flex-row space-x-4 items-center">
                 <div className="flex flex-col items-center space-y-1">
                     <button onClick={() => handleVote('upvote')}>
-                        <img src={upvote} alt="Upvote" className="max-w-[12px]"/>
+                        <img src={selectedVote === 'upvote' ? upvote_selected : upvote} alt="Upvote"
+                             className="max-w-[12px]"/>
                     </button>
-                    <p>{quote.reactions?.filter(quote => quote.type === 'upvote').length}</p>
+                    <p>{score}</p>
                     <button onClick={() => handleVote('downvote')}>
-                        <img src={downvote} alt="Downvote" className="max-w-[12px]"/>
+                        <img src={selectedVote === 'downvote' ? downvote_selected : downvote} alt="Downvote"
+                             className="max-w-[12px]"/>
                     </button>
                 </div>
                 <div className="space-y-2">
