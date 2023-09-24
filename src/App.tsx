@@ -1,26 +1,14 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import {FC} from "react";
+import Routes from "./routes/Routes";
+import {usePageIdentification} from "./hooks/usePageIdentification";
+import {observer} from "mobx-react";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+const App: FC = () => {
+    usePageIdentification();
+    // ToDo: temporarily disable refresh tokens because the backend doesn't support it yet
+    //useAuth();
 
-export default App;
+    return <Routes/>;
+};
+
+export default observer(App);
