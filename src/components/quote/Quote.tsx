@@ -42,7 +42,7 @@ const Quote: React.FC<Props> = ({quote}) => {
     }
 
     return (
-        <div className="rounded-card shadow-md p-5">
+        <div className="rounded-card lg:rounded-card-lg shadow-md p-5">
             <div className="flex flex-row space-x-4 items-center">
                 <div className="flex flex-col items-center space-y-1">
                     <button onClick={() => handleVote('upvote')}>

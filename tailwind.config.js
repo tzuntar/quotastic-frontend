@@ -31,7 +31,8 @@ module.exports = {
                 'darkener': 'inset 0 0 100px 100px rgba(0, 0, 0, 0.025)'
             },
             borderRadius: {
-                'card': '16px'
+                'card': '16px',
+                'card-lg': '10px',
             }
         },
     },
