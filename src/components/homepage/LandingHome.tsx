@@ -20,13 +20,13 @@ const LandingHome: React.FC = () => {
     ]);
 
     return (
-        <div className="p-10">
+        <div className="p-10 pb-28">
             <h1 className="text-3xl">Welcome<br/>to <span className="text-orange">Quotastic</span></h1>
             <p className="py-5 text-lg mb-4">Quotastic is a free online platform, built for those who love quips,
                 quotes, and proverbs. Join the community and express yourself through creative writing.</p>
 
             <Link to={routeConstants.SIGNUP}>
-                <p className="inline bg-gradient-to-t from-orange to-alt-orange
+                <p className="inline bg-orange
                               py-2.5 px-8 rounded-full mt-6 text-white cursor-pointer
                               drop-shadow-md hover:shadow-lightener active:brightness-90">
                     Join Our Community
@@ -50,9 +50,9 @@ const LandingHome: React.FC = () => {
             {authStore.user === null &&
                 <div className="flex justify-center">
                     <Link to={routeConstants.LOGIN}>
-                        <p className="inline bg-gradient-to-t from-light-gray to-lighter-gray
+                        <p className="inline bg-lighter-gray
                                       py-2.5 px-8 rounded-full mt-6 text-orange cursor-pointer
-                                      drop-shadow-sm-ext hover:shadow-lightener active:brightness-90">
+                                      drop-shadow-sm-ext hover:shadow-darkener active:brightness-90">
                             Sign In to See More
                         </p>
                     </Link>
