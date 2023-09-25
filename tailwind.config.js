@@ -8,7 +8,9 @@ module.exports = {
             'orange': '#DE8667',
             'alt-orange': '#EFB467',
             'dark': '#322D38',
-            'white': "#FFFFFF"
+            'white': '#FFFFFF',
+            'light-gray': '#e7e7e7',
+            'lighter-gray': '#f6f6f6'
         },
         fontFamily: {
             sans: ['Raleway', 'sans-serif']
@@ -19,6 +21,7 @@ module.exports = {
             },
             dropShadow: {
                 'sm': '0 0 5px #00000008',
+                'sm-ext': '0 0 10px #00000008',
                 'md': '0 0 10px #00000018'
             },
             boxShadow: {
