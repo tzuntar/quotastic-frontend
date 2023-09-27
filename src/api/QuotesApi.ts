@@ -9,7 +9,11 @@ export const fetchQuotes = async (pageNumber: number, limit: number) =>
 export const fetchTopQuotes = async (pageNumber: number, limit: number) =>
     apiRequest<undefined, QuoteType[]>('get', `${apiRoutes.QUOTES_PREFIX}/top?page=${pageNumber}&limit=${limit}`);
 
-// fetchRecentQuotes, fetchByUser?
+export const fetchQuoteOfTheDay = async () =>
+    apiRequest<undefined, QuoteType>('get', `${apiRoutes.QUOTES_PREFIX}/quote_of_the_day`);
+
+export const fetchByUser = async(userId: string, pageNumber: number, limit: number) =>
+    apiRequest<undefined, QuoteType[]>('get', `${apiRoutes.QUOTES_PREFIX}?user=${userId}&page=${pageNumber}&limit=${limit}`);
 
 export const createQuote = async (data: CreateUpdateQuoteFields) =>
     apiRequest<CreateUpdateQuoteFields, QuoteType>('post', `/me/myquote`, data);
