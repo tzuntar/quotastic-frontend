@@ -32,7 +32,7 @@ module.exports = {
             },
             borderRadius: {
                 'card': '16px',
-                'card-lg': '10px',
+                'card-lg': '8px',
             }
         },
     },

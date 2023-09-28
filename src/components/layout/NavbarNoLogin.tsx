@@ -12,7 +12,7 @@ const Navbar: React.FC = () => {
     return (
         <header>
             <nav>
-                <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4 px-8 shadow-md">
+                <div className="flex flex-wrap items-center justify-between p-4 px-8 shadow-md lg:shadow-none">
                     <Link to={routeConstants.HOME}>
                         <img src={logo} alt="Quotastic" className="w-40"/>
                     </Link>
