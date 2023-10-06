@@ -5,8 +5,13 @@ import logo from "../../assets/quotastic_logo.png";
 import default_avatar from "../../assets/default_avatar.png";
 import useMobileDetect from "../../hooks/useMobileDetect";
 import authStore from "../../stores/auth.store";
+import {ModalActions} from "../../constants/modalActionConstants";
 
-const Navbar: React.FC = () => {
+interface Props {
+    menuActionHandler: (action: string) => void
+}
+
+const Navbar: React.FC<Props> = ({menuActionHandler}) => {
     const {isMobile} = useMobileDetect(990);
     const [menuVisible, setMenuVisible] = useState(false);
 
@@ -63,9 +68,9 @@ const Navbar: React.FC = () => {
                         <Link to={routeConstants.HOME}>
                             <p className="text-orange hover:text-alt-orange text-lg">Home</p>
                         </Link>
-                        <Link to={routeConstants.USER_PREFERENCES}>
+                        <button onClick={() => menuActionHandler(ModalActions.USER_PREFERENCES)}>
                             <p className="text-orange hover:text-alt-orange text-lg">Preferences</p>
-                        </Link>
+                        </button>
                         <Link to={routeConstants.LOGOUT}>
                             <p className="text-orange hover:text-alt-orange text-lg">Sign Out</p>
                         </Link>
@@ -73,7 +78,7 @@ const Navbar: React.FC = () => {
                             <img src={authStore?.user?.avatarUrl ? authStore.user.avatarUrl : default_avatar}
                                  alt="Profile" className="w-8 drop-shadow-sm"/>
                         </Link>
-                        <Link to={routeConstants.POST_QUOTE} className="text-orange">
+                        <button onClick={() => menuActionHandler(ModalActions.CREATE_QUOTE)} className="text-orange">
                             <svg
                                 xmlns="http://www.w3.org/2000/svg"
                                 className="h-6 w-6"
@@ -88,7 +93,7 @@ const Navbar: React.FC = () => {
                                     d="M12 6v6m0 0v6m0-6h6m-6 0H6"
                                 />
                             </svg>
-                        </Link>
+                        </button>
                     </div>
                 </nav>
             }
