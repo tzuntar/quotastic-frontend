@@ -4,6 +4,7 @@ import Footer from "./Footer";
 import {userStorage} from "../../lib/localStorage";
 import Navbar from "./Navbar";
 import Modals from "./Modals";
+import {ModalActions} from "../../constants/modalActionConstants";
 
 interface Props {
     children: ReactNode | ReactNode[],
@@ -16,13 +17,18 @@ const Layout: React.FC<Props> = ({children, isVerticallyCentered = false}) => {
     const handleMenuOptionSelect = (action: string) =>
         setShownModal(action);
 
+    const handleModalCancel = () =>
+        setShownModal('');
+
     return (
         <main className="flex flex-col h-screen justify-between">
             {userStorage.getUser() !== null
                 ? <Navbar menuActionHandler={handleMenuOptionSelect}/>
                 : <NavbarNoLogin/>}
             <div className={isVerticallyCentered ? 'm-auto' : 'mb-auto'}>
-                {userStorage.getUser() !== null && <Modals shownModal={shownModal}/>}
+                {userStorage.getUser() !== null &&
+                    <Modals shownModal={shownModal}
+                            onModalClose={handleModalCancel}/>}
                 {children}
             </div>
             <Footer/>

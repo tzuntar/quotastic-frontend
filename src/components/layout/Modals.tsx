@@ -7,12 +7,14 @@ import {ModalActions} from "../../constants/modalActionConstants";
 
 interface Props {
     shownModal?: string,
+    onModalClose: () => void,
 }
 
 /**
- * Handles displaying and managing all modules, available to signed-in users.
+ * Handles displaying and managing all modal dialog boxes, available to
+ * signed-in users.
  */
-const Modals: React.FC<Props> = ({shownModal}) => {
+const Modals: React.FC<Props> = ({shownModal, onModalClose}) => {
 
     const handleQuoteCreation = async (quoteData: CreateUpdateQuoteFields) => {
         const result = await API.createQuote(quoteData);
@@ -21,8 +23,9 @@ const Modals: React.FC<Props> = ({shownModal}) => {
     };
 
     return (
-        <CreateQuoteModal isShown={shownModal === ModalActions.CREATE_QUOTE}
-                          onCreate={handleQuoteCreation}/>
+        shownModal === ModalActions.CREATE_QUOTE &&
+        <CreateQuoteModal onCreate={handleQuoteCreation}
+                          onCancel={() => onModalClose()}/>
     )
 };
 

@@ -1,33 +1,25 @@
-import React, {EventHandler, useEffect, useState} from 'react';
+import React, {EventHandler, useState} from 'react';
 
 interface Props {
-    isShown: boolean,
-    onCreate: EventHandler<any>
+    onCreate: EventHandler<any>,
+    onCancel: () => void,
 }
 
-const CreateQuoteModal: React.FC<Props> = ({isShown, onCreate}) => {
+const CreateQuoteModal: React.FC<Props> = ({onCreate, onCancel}) => {
     const [body, setBody] = useState('');
-    const [isOpen, setIsOpen] = useState(isShown);
 
     const handleBodyChange = (e: any) => setBody(e.target.value);
 
     const handleCreate = () => {
         if (body.trim() === '') return;
         onCreate({body: body});
-
-        setBody('');    // necessary cleanup
-        handleClose();
+        onCancel();
     };
-
-    const handleClose = () => setIsOpen(false);
-
-    useEffect(() => setIsOpen(isShown), [isShown]);
 
     return (
         <div
             className={`fixed left-0 top-0 z-[1500] h-full w-full overflow-y-auto overflow-x-hidden
-                        bg-[#0000005F] backdrop-blur-sm outline-none
-                        ${isOpen ? 'block' : 'hidden'}`}>
+                        bg-[#0000005F] backdrop-blur-sm outline-none`}>
             {/* ToDo: add 'opacity-0' to the following div to enable fade-in-out */}
             <div className="relative flex min-h-[calc(100%-1rem)] w-auto translate-y-[-50px] items-center
                             transition-all duration-300 ease-in-out
@@ -45,15 +37,17 @@ const CreateQuoteModal: React.FC<Props> = ({isShown, onCreate}) => {
                         value={body}
                         onChange={handleBodyChange}
                         rows={4}
-                        placeholder="Enter your quote here"
+                        placeholder="Type your quote here"
                     ></textarea>
                     <div className="flex flex-row space-x-5">
                         <button className="inline bg-orange
                                            py-1.5 px-8 rounded-full text-white cursor-pointer
                                            drop-shadow-md hover:shadow-lightener active:brightness-90"
-                                onClick={handleCreate}>Post</button>
+                                onClick={handleCreate}>Post
+                        </button>
                         <button className="hover:shadow-lightener active:brightness-90 cursor-pointer"
-                                onClick={handleClose}>Cancel</button>
+                                onClick={() => onCancel()}>Cancel
+                        </button>
                     </div>
                 </div>
             </div>
