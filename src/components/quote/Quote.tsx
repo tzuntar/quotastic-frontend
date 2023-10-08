@@ -6,7 +6,7 @@ import upvote_selected from '../../assets/icons/upvote_selected.png';
 import downvote from '../../assets/icons/downvote.png';
 import downvote_selected from '../../assets/icons/downvote_selected.png';
 import default_avatar from '../../assets/default_avatar.png';
-import {useNavigate} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import {routeConstants} from "../../constants/routeConstants";
 import authStore from "../../stores/auth.store";
 import {StatusCode} from "../../constants/statusCodeConstants";
@@ -57,13 +57,15 @@ const Quote: React.FC<Props> = ({quote}) => {
                 </div>
                 <div className="space-y-2">
                     <p>{quote.body}</p>
-                    <p className="text-xs pt-2">
-                        <img src={
-                            quote.user?.avatarUrl !== null
-                                ? quote.user?.avatarUrl
-                                : default_avatar
-                        } alt="Avatar" className="w-6 inline mr-2 drop-shadow-md"/>
-                        {quote.user.firstName} {quote.user.lastName}</p>
+                    <Link to={`${routeConstants.USER_PROFILE}/${quote.user?.id}`}>
+                        <p className="text-xs pt-2">
+                            <img src={
+                                quote.user?.avatarUrl !== null
+                                    ? quote.user?.avatarUrl
+                                    : default_avatar
+                            } alt="Avatar" className="w-6 inline mr-2 drop-shadow-md"/>
+                            {quote.user.firstName} {quote.user.lastName}</p>
+                    </Link>
                 </div>
             </div>
         </div>

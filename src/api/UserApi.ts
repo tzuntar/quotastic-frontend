@@ -18,3 +18,6 @@ export const refreshTokens = async () =>
 
 export const logout = async () =>
     apiRequest<undefined, void>('post', apiRoutes.LOGOUT);
+
+export const fetchUserById = async(userId: string) =>
+    apiRequest<undefined, UserType>('get', `${apiRoutes.USERS_PREFIX}/${userId}`);
