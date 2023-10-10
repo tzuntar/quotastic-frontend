@@ -1,7 +1,7 @@
 import React from "react";
 import * as API from '../api/Api';
 import {useParams} from "react-router-dom";
-import {useQuery} from "react-query";
+import {useQueries} from "react-query";
 import ProfileHero from "../components/user/ProfileHero";
 import Layout from "../components/layout/Layout";
 import {StatusCode} from "../constants/statusCodeConstants";
@@ -16,10 +16,16 @@ function missingUserTemplate() {
 
 const UserProfile: React.FC = () => {
     const {userId} = useParams();
-    const user = useQuery({
-        queryKey: ['fetchUserById', 1],
-        queryFn: () => API.fetchUserById(userId!),
-    });
+    const [user, karma] = useQueries([
+        {
+            queryKey: ['fetchUserById', 1],
+            queryFn: () => API.fetchUserById(userId!),
+        },
+        {
+            queryKey: ['fetchUserKarma', 1],
+            queryFn: () => API.fetchUserKarma(userId!),
+        }
+    ]);
     if (!user) return missingUserTemplate();
 
     return (
@@ -31,7 +37,7 @@ const UserProfile: React.FC = () => {
                     </div>
                     : user.data?.status === StatusCode.OK
                         ? <>
-                            <ProfileHero user={user.data?.data}/>
+                            <ProfileHero user={user.data?.data} karma={karma.data?.data}/>
                             <div className="p-10 mt-6">
                                 <h1 className="text-2xl text-orange">Most liked quotes</h1>
                                 <h1 className="text-2xl text-orange">Most recent quotes</h1>

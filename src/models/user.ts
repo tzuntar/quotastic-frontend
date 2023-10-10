@@ -9,3 +9,8 @@ export type UserType = {
     accessToken?: string;
     jwtRefreshToken?: string;
 }
+
+export type UserKarmaType = {
+    karma: number;
+    quotesCount: number;
+}

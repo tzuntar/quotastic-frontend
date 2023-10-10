@@ -1,5 +1,5 @@
 import {apiRequest} from "./Api";
-import {UserType} from "../models/user";
+import {UserKarmaType, UserType} from "../models/user";
 import {apiRoutes} from "../constants/apiConstants";
 import {LoginUserFields} from "../hooks/react-hook-form/useLogin";
 import {RegistrationUserFields} from "../hooks/react-hook-form/useRegistration";
@@ -21,3 +21,6 @@ export const logout = async () =>
 
 export const fetchUserById = async(userId: string) =>
     apiRequest<undefined, UserType>('get', `${apiRoutes.USERS_PREFIX}/${userId}`);
+
+export const fetchUserKarma = async(userId: string) =>
+    apiRequest<undefined, UserKarmaType>('get', `${apiRoutes.USERS_PREFIX}/${userId}/karma`);
