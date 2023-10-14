@@ -22,6 +22,7 @@ const Registration = lazy(() => import("../pages/Registration"));
 /* Private routes */
 //const UserPrefs = lazy(() => import("pages/User/Preferences"));
 //const Quotes = lazy(() => import("pages/Quotes"));
+const UserProfile = lazy(() => import('../pages/UserProfile'));
 
 /* Restricted routes */
 
@@ -29,8 +30,7 @@ const Registration = lazy(() => import("../pages/Registration"));
 const NotFound404 = lazy(() => import("../pages/Errors/NotFound404"));
 
 export const AppRoutes: AppRoute[] = [
-    // Restricted Routes
-/*    // Private Routes
+/*  // Private Routes
     {
         type: RouteType.PRIVATE,
         path: "/me/preferences",
@@ -41,6 +41,11 @@ export const AppRoutes: AppRoute[] = [
         path: "/quotes",
         children: <Quotes/>,
     },*/
+    {
+        type: RouteType.PRIVATE,
+        path: '/profile/:userId',
+        children: <UserProfile/>
+    },
     // Public Routes
     {
         type: RouteType.PUBLIC,
