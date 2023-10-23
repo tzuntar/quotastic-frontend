@@ -16,6 +16,10 @@ export const register = async (data: RegistrationUserFields) =>
 export const refreshTokens = async () =>
     apiRequest<undefined, UserType>('post', apiRoutes.REFRESH_TOKENS);
 
+// FixMe: proper UpdatePasswordFields object
+export const updatePassword = async (password: string) =>
+    apiRequest<undefined, UserType>('patch', apiRoutes.UPDATE_CURRENT_USER_PASSWORD);
+
 export const logout = async () =>
     apiRequest<undefined, void>('post', apiRoutes.LOGOUT);
 
