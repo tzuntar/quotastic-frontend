@@ -5,18 +5,14 @@ import {CreateUpdateQuoteFields} from "../../hooks/react-hook-form/useCreateUpda
 import {StatusCode} from "../../constants/statusCodeConstants";
 import {ModalActions} from "../../constants/modalActionConstants";
 import EditQuoteModal from "../quote/EditQuoteModal";
-
-interface Props {
-    shownModal?: string,
-    modalData?: any,
-    onModalClose: () => void,
-}
+import {useModal} from "../../features/ModalContext";
 
 /**
  * Handles displaying and managing all modal dialog boxes, available to
  * signed-in users.
  */
-const Modals: React.FC<Props> = ({shownModal, modalData, onModalClose}) => {
+const Modals: React.FC = () => {
+    const { shownModal, setShownModal, modalData } = useModal();
 
     const handleQuoteCreation = async (quoteData: CreateUpdateQuoteFields) => {
         const result = await API.createQuote(quoteData);
@@ -30,17 +26,19 @@ const Modals: React.FC<Props> = ({shownModal, modalData, onModalClose}) => {
             alert('Unable to save the edited quote');
     }
 
+    const handleModalClose = () => setShownModal(null);
+
     return (
         <>
             {shownModal === ModalActions.CREATE_QUOTE &&
                 <CreateQuoteModal onCreate={handleQuoteCreation}
-                                  onClose={onModalClose}/>
+                                  onClose={handleModalClose}/>
             }
 
             {shownModal === ModalActions.UPDATE_QUOTE &&
                 <EditQuoteModal quote={modalData}
                                 onEditingDone={handleQuoteEdit}
-                                onClose={onModalClose}/>
+                                onClose={handleModalClose}/>
             }
         </>
     )

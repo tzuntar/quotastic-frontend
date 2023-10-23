@@ -12,6 +12,8 @@ import {Link, useNavigate} from "react-router-dom";
 import {routeConstants} from "../../constants/routeConstants";
 import authStore from "../../stores/auth.store";
 import {StatusCode} from "../../constants/statusCodeConstants";
+import {useModal} from "../../features/ModalContext";
+import {ModalActions} from "../../constants/modalActionConstants";
 
 type VoteType = 'upvote' | 'downvote' | null;
 
@@ -21,6 +23,8 @@ interface Props {
 }
 
 const Quote: React.FC<Props> = ({quote, enableEditControls}) => {
+    const { setShownModal, setModalData } = useModal();
+
     const initialScore = useMemo(() => {
         return quote.reactions?.filter(r => r.type === 'upvote').length || 0
     }, [quote.reactions]);
@@ -46,7 +50,8 @@ const Quote: React.FC<Props> = ({quote, enableEditControls}) => {
     }
 
     const handleEditQuote = async () => {
-
+        setModalData(quote);
+        setShownModal(ModalActions.UPDATE_QUOTE);
     }
 
     const handleDeleteQuote = async () => {
