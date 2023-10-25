@@ -3,6 +3,7 @@ import {Route, RouteProps, Routes as Switch} from "react-router-dom";
 
 import PrivateRoute from "./PrivateRoute";
 import RestrictedRoute from "./RestrictedRoute";
+import Logout from "../features/Logout";
 
 export enum RouteType {
     PUBLIC,
@@ -67,6 +68,11 @@ export const AppRoutes: AppRoute[] = [
         type: RouteType.PUBLIC,
         path: "/signup",
         children: <Registration/>,
+    },
+    {
+        type: RouteType.PUBLIC,
+        path: "/logout",
+        children: <Logout/>
     },
     // 404 Not Found
     {
