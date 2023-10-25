@@ -1,4 +1,5 @@
 import React, {EventHandler, useState} from "react";
+import {PasswordUpdateFields} from "../../hooks/react-hook-form/useUpdateUserPrefs";
 
 interface Props {
     onSave: EventHandler<any>,
@@ -7,24 +8,31 @@ interface Props {
 
 const UserPrefsModal: React.FC<Props> = ({onSave, onClose}) => {
     const [password, setPassword] = useState('');
+    const [newPassword, setNewPassword] = useState('');
     const [confirmPass, setConfirmPass] = useState('');
     const [passwordsMatch, setPasswordsMatch] = useState(true);
 
-
-    const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) =>
         setPassword(e.target.value);
+
+    const handleNewPasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setNewPassword(e.target.value);
         setPasswordsMatch(e.target.value === confirmPass);
     };
 
     const handleConfirmPassChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setConfirmPass(e.target.value);
-        setPasswordsMatch(e.target.value === password);
+        setPasswordsMatch(e.target.value === newPassword);
     };
 
     const handleSave = () => {
-        if (password.trim() === '') return;
+        if (newPassword.trim() === '') return;
         if (!passwordsMatch) return;
-        onSave({password: password});
+        const data: PasswordUpdateFields = {
+            currentPassword: password,
+            newPassword: newPassword
+        };
+        onSave(data);
         onClose();
     }
 
@@ -40,13 +48,23 @@ const UserPrefsModal: React.FC<Props> = ({onSave, onClose}) => {
                                 bg-white bg-clip-padding text-current shadow-lg p-6 space-y-6">
                     <h1 className="text-2xl lg:font-extralight">User <span
                         className="text-orange">Preferences.</span></h1>
-                    <label htmlFor="quoteBody" className="">Type a new password in these two fields to use it instead of your current one.</label>
+
+                    <label htmlFor="current_password">Your current password is required to make any changes</label>
+                    
+                    <input type="password" name="current_password"
+                           className="outline-orange border-alt-orange border-2 rounded-full px-5 py-1.5 mt-3
+                                      focus:drop-shadow-sm resize-none"
+                           placeholder="Enter your current password"
+                           onChange={handlePasswordChange}/>
+
+                    <label htmlFor="new_password" className="">Type a new password in these two fields to use it instead
+                        of your current one.</label>
 
                     <input type="password" name="new_password"
                            className="outline-orange border-alt-orange border-2 rounded-full px-5 py-1.5 mt-3
                                       focus:drop-shadow-sm resize-none"
                            placeholder="Make up a new password"
-                           onChange={handlePasswordChange}/>
+                           onChange={handleNewPasswordChange}/>
 
                     <input type="password" name="confirm_new_password"
                            className="outline-orange border-alt-orange border-2 rounded-full px-5 py-1.5 mt-3

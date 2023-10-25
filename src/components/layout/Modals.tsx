@@ -7,6 +7,7 @@ import {ModalActions} from "../../constants/modalActionConstants";
 import EditQuoteModal from "../quote/EditQuoteModal";
 import {useModal} from "../../features/ModalContext";
 import UserPrefsModal from "../user/UserPrefsModal";
+import {PasswordUpdateFields} from "../../hooks/react-hook-form/useUpdateUserPrefs";
 
 /**
  * Handles displaying and managing all modal dialog boxes, available to
@@ -27,8 +28,7 @@ const Modals: React.FC = () => {
             alert('Unable to save the edited quote');
     }
 
-    const handleUserPrefsSave = async (data: any) => {
-        // FixMe: proper UpdatePasswordFields object
+    const handleUserPrefsSave = async (data: PasswordUpdateFields) => {
         const result = await API.updatePassword(data);
         if (result.status !== StatusCode.OK)
             alert('Saving your new password failed');
