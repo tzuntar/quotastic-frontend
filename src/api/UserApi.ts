@@ -3,6 +3,7 @@ import {UserKarmaType, UserType} from "../models/user";
 import {apiRoutes} from "../constants/apiConstants";
 import {LoginUserFields} from "../hooks/react-hook-form/useLogin";
 import {RegistrationUserFields} from "../hooks/react-hook-form/useRegistration";
+import {PasswordUpdateFields} from "../hooks/react-hook-form/useUpdateUserPrefs";
 
 export const getCurrentUser = async () =>
     apiRequest<undefined, UserType>('get', apiRoutes.CURRENT_USER);
@@ -15,6 +16,9 @@ export const register = async (data: RegistrationUserFields) =>
 
 export const refreshTokens = async () =>
     apiRequest<undefined, UserType>('post', apiRoutes.REFRESH_TOKENS);
+
+export const updatePassword = async (data: PasswordUpdateFields) =>
+    apiRequest<PasswordUpdateFields, boolean>('patch', apiRoutes.UPDATE_CURRENT_USER_PASSWORD, data);
 
 export const logout = async () =>
     apiRequest<undefined, void>('post', apiRoutes.LOGOUT);

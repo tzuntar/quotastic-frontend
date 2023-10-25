@@ -28,7 +28,7 @@ export const updateQuote = async (data: CreateUpdateQuoteFields, id: string) =>
     apiRequest<CreateUpdateQuoteFields, QuoteType>('patch', `/me/myquote/${id}`, data);
 
 export const deleteQuote = async (id: string) =>
-    apiRequest<string, QuoteType>('delete', `${apiRoutes.QUOTES_PREFIX}/${id}`);
+    apiRequest<string, QuoteType>('delete', `/me/myquote/${id}`);
 
 export const vote = async (id: string, voteType?: "upvote" | "downvote" | null) =>
     apiRequest<string, QuoteType | void>('post', `${apiRoutes.QUOTES_PREFIX}/${id}/vote?vote=${voteType}`);

@@ -46,7 +46,8 @@ const Navbar: React.FC<Props> = ({menuActionHandler}) => {
                                     <img src={logo} alt="Quotastic" className="w-28 md:w-40"/>
                                 </Link>
                             </div>
-                            <Link to={routeConstants.POST_QUOTE} className="text-orange">
+                            <button onClick={() => menuActionHandler(ModalActions.CREATE_QUOTE)}
+                                    className="text-orange±">
                                 <svg
                                     xmlns="http://www.w3.org/2000/svg"
                                     className="h-6 w-6"
@@ -61,7 +62,7 @@ const Navbar: React.FC<Props> = ({menuActionHandler}) => {
                                         d="M12 6v6m0 0v6m0-6h6m-6 0H6"
                                     />
                                 </svg>
-                            </Link>
+                            </button>
                         </>
                         :
                         <>
@@ -115,9 +116,9 @@ const Navbar: React.FC<Props> = ({menuActionHandler}) => {
                                     </svg>
                                 </div>
                                 <div className="block pt-6 flex flex-row justify-between">
-                                    <Link to={routeConstants.USER_PREFERENCES}>
+                                    <button onClick={() => menuActionHandler(ModalActions.USER_PREFERENCES)}>
                                         Preferences
-                                    </Link>
+                                    </button>
                                     <svg
                                         xmlns="http://www.w3.org/2000/svg"
                                         className="h-4 w-4"
@@ -166,7 +167,8 @@ const Navbar: React.FC<Props> = ({menuActionHandler}) => {
                         <Link to={routeConstants.HOME}>
                             <p className="text-orange hover:text-alt-orange text-lg">Home</p>
                         </Link>
-                        <button onClick={() => menuActionHandler(ModalActions.USER_PREFERENCES)}>
+                        <button onClick={() => menuActionHandler(ModalActions.USER_PREFERENCES)}
+                                className="h-0">
                             <p className="text-orange hover:text-alt-orange text-lg">Preferences</p>
                         </button>
                         <Link to={routeConstants.LOGOUT}>
@@ -176,7 +178,8 @@ const Navbar: React.FC<Props> = ({menuActionHandler}) => {
                             <img src={authStore?.user?.avatarUrl ? authStore.user.avatarUrl : default_avatar}
                                  alt="Profile" className="w-8 drop-shadow-sm"/>
                         </Link>
-                        <button onClick={() => menuActionHandler(ModalActions.CREATE_QUOTE)} className="text-orange">
+                        <button onClick={() => menuActionHandler(ModalActions.CREATE_QUOTE)}
+                                className="text-orange h-0">
                             <svg
                                 xmlns="http://www.w3.org/2000/svg"
                                 className="h-6 w-6"

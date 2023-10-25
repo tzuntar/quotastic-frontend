@@ -6,18 +6,25 @@ import upvote_selected from '../../assets/icons/upvote_selected.png';
 import downvote from '../../assets/icons/downvote.png';
 import downvote_selected from '../../assets/icons/downvote_selected.png';
 import default_avatar from '../../assets/default_avatar.png';
+import settings from '../../assets/icons/settings.png';
+import cross from '../../assets/icons/cross.png';
 import {Link, useNavigate} from "react-router-dom";
 import {routeConstants} from "../../constants/routeConstants";
 import authStore from "../../stores/auth.store";
 import {StatusCode} from "../../constants/statusCodeConstants";
+import {useModal} from "../../features/ModalContext";
+import {ModalActions} from "../../constants/modalActionConstants";
 
 type VoteType = 'upvote' | 'downvote' | null;
 
 interface Props {
     quote: QuoteType;
+    enableEditControls?: boolean,
 }
 
-const Quote: React.FC<Props> = ({quote}) => {
+const Quote: React.FC<Props> = ({quote, enableEditControls}) => {
+    const { setShownModal, setModalData } = useModal();
+
     const initialScore = useMemo(() => {
         return quote.reactions?.filter(r => r.type === 'upvote').length || 0
     }, [quote.reactions]);
@@ -28,6 +35,7 @@ const Quote: React.FC<Props> = ({quote}) => {
     const [score, setScore] = useState(initialScore);
     // auto-select the voting button if the user has already voted on this quote
     const [selectedVote, setSelectedVote] = useState<VoteType>(initialVote?.type as VoteType);
+    const [isDeleted, setIsDeleted] = useState(false);
 
     const navigate = useNavigate();
     const isLoggedIn = authStore.user !== null;
@@ -41,9 +49,26 @@ const Quote: React.FC<Props> = ({quote}) => {
         }
     }
 
-    return (
+    const handleEditQuote = async () => {
+        setModalData(quote);
+        setShownModal(ModalActions.UPDATE_QUOTE);
+    }
+
+    const handleDeleteQuote = async () => {
+        const result = await API.deleteQuote(quote.id);
+        if (result.status !== StatusCode.OK &&
+            result.status !== StatusCode.NO_CONTENT) {
+            alert('Deleting the quote failed');     // ToDo: better UI
+            return;
+        }
+
+        setIsDeleted(true);
+    }
+
+    return (!isDeleted &&
         <div className="rounded-card lg:rounded-card-lg shadow-md p-5">
             <div className="flex flex-row space-x-4 items-center">
+
                 <div className="flex flex-col items-center space-y-1">
                     <button onClick={() => handleVote('upvote')}>
                         <img src={selectedVote === 'upvote' ? upvote_selected : upvote} alt="Upvote"
@@ -55,7 +80,8 @@ const Quote: React.FC<Props> = ({quote}) => {
                              className="max-w-[12px]"/>
                     </button>
                 </div>
-                <div className="space-y-2">
+
+                <div className="space-y-2 flex-grow">
                     <p>{quote.body}</p>
                     <Link to={`${routeConstants.USER_PROFILE}/${quote.user?.id}`}>
                         <p className="text-xs pt-2">
@@ -67,9 +93,20 @@ const Quote: React.FC<Props> = ({quote}) => {
                             {quote.user.firstName} {quote.user.lastName}</p>
                     </Link>
                 </div>
+
+                {enableEditControls &&
+                    <div className="flex flex-col items-center space-y-4">
+                        <button onClick={handleEditQuote}>
+                            <img src={settings} alt="Edit Quote" className="min-w-[16px] max-w-[16px]"/>
+                        </button>
+                        <button onClick={handleDeleteQuote}>
+                            <img src={cross} alt="Delete Quote" className="min-w-[12px] max-w-[12px]"/>
+                        </button>
+                    </div>
+                }
+
             </div>
-        </div>
-    )
+        </div>)
 }
 
 export default Quote;
