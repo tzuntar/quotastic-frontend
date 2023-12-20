@@ -1,46 +1,47 @@
-# Getting Started with Create React App
+<p align="center">
+  <a href="" rel="noopener">
+  <img width="200px" alt="Quotastic Logo" src="https://github.com/tzuntar/quotastic-backend/assets/35228139/f2f365d5-1fba-49cd-a656-c030a781a2db" />
+</p>
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+<h3 align="center">SkillUp Mentor • Quotastic [Front-End]</h3>
 
-## Available Scripts
+---
 
-In the project directory, you can run:
+This repository contains the code for the back-end to the web app Quotastic,
+made as a project for the [SkillUp Mentor Bootcamp](https://skillupmentor.com/).
 
-### `yarn start`
+Quotastic is an application that lets users post their favorite quotes, read quotes posted by others,
+and vote on them.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+<img width="1323" alt="D5" src="https://github.com/tzuntar/quotastic-frontend/assets/35228139/2aac1c9e-a6c3-423d-8bdf-5eed35f18727">
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+The back-end part of the project is in the [tzuntar/quotastic-backend](https://github.com/tzuntar/quotastic-backend) repository.
 
-### `yarn test`
+---
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## 📝 Table of Contents
 
-### `yarn build`
+- [Getting Started](#getting_started)
+- [Deployment](#deployment)
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## 🏁 Getting Started <a name = "getting_started"></a>
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+These instructions will get you a copy of the Quotastic front-end up and running on your local machine for development and testing
+purposes. See [deployment](#deployment) for notes on how to deploy the project on a live system.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### ✅ Prerequisites <a name = "prerequisites"></a>
 
-### `yarn eject`
+- Node.js and Yarn
+- Up and running [back-end](https://github.com/tzuntar/quotastic-backend)
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+### ⏳Installing
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+1. Install all required dependencies by running `yarn install`
+2. Set the following environmental variables:
+   - `API_URL`: full URL to the back-end (ex. `https://localhost:8000`)
+4. Run the development server using `npm start` / `yarn start`
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+## 🚀 Deployment <a name = "deployment"></a>
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+Run `yarn build` to create an optimized production version. Make sure to configure the env. variables on
+the server as well.
