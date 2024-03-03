@@ -26,6 +26,7 @@ const Modals: React.FC = () => {
         const result = await API.updateQuote(quoteData, modalData.id);
         if (result.status !== StatusCode.OK)
             alert('Unable to save the edited quote');
+        else window.location.reload();
     }
 
     const handleUserPrefsSave = async (data: PasswordUpdateFields) => {
